@@ -1,0 +1,16 @@
+Data types~
+
+Primitives:
+-Integer: represents a whole number (e.g., 1, 2, 3).
+-Float: represents a decimal number (e.g., 3.14, 0.5).
+-Atom: represents a constant with a name (e.g., :ok, :error).
+-Boolean: represents either true or false.
+-Nil: represents nothing (like null in java, js, python)
+-pid: represets a process identifier
+
+Structures:
+-Tuple: a collection of elements with a fixed size and order (e.g., {1, 2, 3}).
+-List: a collection of elements with a variable size and order (e.g., [1, 2, 3]).
+-Map: a collection of key-value pairs (e.g., %{name: "Alice", age: 30}).
+-String: Sequence of bytes, not as a linked list of characters like in some other languages
+-Struct: a map with a predefined set of keys and default values (e.g., defstruct name: "Alice", age: 30).
