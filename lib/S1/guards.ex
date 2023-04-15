@@ -1,4 +1,4 @@
-def S1.Guards do
+defmodule S1.Guards do
   def example_1 do
     #Example 1
     number = 42

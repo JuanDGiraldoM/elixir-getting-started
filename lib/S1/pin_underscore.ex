@@ -17,8 +17,8 @@ defmodule S1.PinUnderscore do
     x = 10
 
     case 20 do
-      x -> IO.puts("Matched #{x}") # In this code, the variable x is defined and assigned the value 10. The case construct introduces a new variable binding for x that matches against the value 20 This will print "Matched 20"
-      #^x -> IO.puts("Matched #{x}") #To prevent rebinding and match against the existing value of x, you can use the pin operator. In this code, the ^x pattern matches against the existing value of x (which is 10), so the code will print "No match".
+      #x -> IO.puts("Matched #{x}") # In this code, the variable x is defined and assigned the value 10. The case construct introduces a new variable binding for x that matches against the value 20 This will print "Matched 20"
+      ^x -> IO.puts("Matched #{x}") #To prevent rebinding and match against the existing value of x, you can use the pin operator. In this code, the ^x pattern matches against the existing value of x (which is 10), so the code will print "No match".
       _ -> IO.puts("No match")
     end
   end
@@ -31,8 +31,8 @@ defmodule S1.PinUnderscore do
     list = [1, 2, 3]
 
     case list do
-      [y, 2, 3] -> IO.puts("Matched!") #will match any list that starts with the value 1, which is the current value of the variable y
-      #[^y, 2, 3] -> IO.puts("Matched!") # , if you want to pattern match against the specific value 1 that is already bound to y
+      #[y, 2, 3] -> IO.puts("Matched!") #will match any list that starts with the value 1, which is the current value of the variable y
+      [^y, 2, 3] -> IO.puts("Matched!") # , if you want to pattern match against the specific value 1 that is already bound to y
       _ -> IO.puts("Not matched!")
     end
 

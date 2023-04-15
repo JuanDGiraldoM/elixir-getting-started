@@ -1,6 +1,6 @@
 defmodule S1.DatatypesII.Lists do
   defp concept do
-    """
+    _ = """
     Lists in Elixir are implemented as linked lists, not as arrays of contiguous memory locations.
     Therefore, accessing an element of a list takes a linear time that depends on the length of the list.
 
@@ -30,7 +30,7 @@ defmodule S1.DatatypesII.Lists do
   end
 
   def add_remove_elems do
-    """
+    _ = """
     Adding an element requires traversing the entire list and adding the element at the end,
     so adding a new element at each iteration would require traversing the entire list at each
     iteration.We can achieve the same result by prepending an element to the inverted list,
@@ -45,6 +45,7 @@ defmodule S1.DatatypesII.Lists do
   end
 
   def some_functions do
+    nums_example = [3, 10, 7, 2, 1 ,6]
     IO.inspect(List.first(nums_example), label: "First element")
     IO.inspect(List.last(nums_example), label: "Last element")
     IO.inspect(List.insert_at(nums_example, 0, :new_insert), label: "New insert")

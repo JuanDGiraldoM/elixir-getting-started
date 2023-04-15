@@ -1,6 +1,6 @@
 defmodule S1.DatatypesII.Maps do
   defp concept do
-    """
+    _ = """
     Whenever you need a key-value store, maps are the data structure to turn to in Elixir.
     """
   end

@@ -1,6 +1,6 @@
 defmodule S1.DatatypesII.Enums do
   defp concept do
-    """
+    _ = """
     In Elixir, an enumerable is any data type that implements the Enumerable protocol.
     It acts as soon as its functions are invoked, having an 'eager' behavior.
     """

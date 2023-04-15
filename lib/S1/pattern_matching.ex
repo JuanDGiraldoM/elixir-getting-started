@@ -13,6 +13,7 @@ defmodule S1.PatternMatching do
   end
 
   def even_odd_2 do
+    number_in = IO.gets("Type a number: ") |> String.trim |> String.to_integer
     #Solution 2
     cond do
       rem(number_in,2) == 0 -> IO.puts("It is an even number")
@@ -21,6 +22,7 @@ defmodule S1.PatternMatching do
   end
 
   def even_odd_3 do
+    number_in = IO.gets("Type a number: ") |> String.trim |> String.to_integer
 
     #Solution 3
     with is_odd <- rem(number_in,2) == 0,
@@ -33,6 +35,7 @@ defmodule S1.PatternMatching do
   end
 
   def even_odd_4 do
+    number_in = IO.gets("Type a number: ") |> String.trim |> String.to_integer
     if (rem(number_in,2) == 0), do: IO.puts("It is an even number"), else: IO.puts("It is an odd number")
   end
 
@@ -45,7 +48,7 @@ defmodule S1.PatternMatching do
     case String.reverse(text_in) do
       "" ->
         IO.puts("The string is empty")
-      text_in ->
+      ^text_in ->
         IO.puts("It is palindrome")
       _ ->
         IO.puts("Not a palindrome")

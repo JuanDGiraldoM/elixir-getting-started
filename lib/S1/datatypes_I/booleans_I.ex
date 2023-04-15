@@ -66,7 +66,7 @@ defmodule S1.DatatypesI.Booleans_I do
   end
 
   def logical_operators do
-    v = :yay
+    _v = :yay
     w = nil
     x = 1
     y = false
