@@ -1,9 +1,15 @@
-#Example 1
-cond do
-  2 + 2 == 5 -> IO.puts "This is not true dude"
-  2 - 2 < 0 -> IO.puts "Nor this"
-  2 * 2 == 2 + 2 -> IO.puts "But this will"
+defmodule S1.FlowControl.Case do
+  def example_1 do
+    #Example 1
+    cond do
+      2 + 2 == 5 -> IO.puts "This is not true dude"
+      2 - 2 < 0 -> IO.puts "Nor this"
+      2 * 2 == 2 + 2 -> IO.puts "But this will"
+    end
+  end
 end
+
+
 
 
 #Example 2
