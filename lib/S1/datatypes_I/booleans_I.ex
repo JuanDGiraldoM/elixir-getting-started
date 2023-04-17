@@ -1,4 +1,4 @@
-defmodule S1.DatatypesI.Booleans_I do
+defmodule S1.DatatypesI.BooleansI do
   def outputs do
     IO.puts("true? #{is_boolean(true)}")
     IO.puts("\"true\"? #{is_boolean("true")}")

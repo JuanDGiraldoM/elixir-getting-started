@@ -1,4 +1,4 @@
-defmodule S1.DatatypesI.Booleans_II do
+defmodule S1.DatatypesI.BooleansII do
   def operators do
     # Example 1
     a = true

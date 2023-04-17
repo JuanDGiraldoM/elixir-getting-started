@@ -1,16 +1,16 @@
 defmodule S1.PinUnderscore do
-  defp concept do
-    """
+
+    _ = """
     The pin operator (^) in Elixir is used to pattern match against a value that has already been assigned to a variable, rather than rebinding the variable to a new value.
 
     The pin operator is necessary in cases where you want to pattern match against a specific value that is already bound to a variable, rather than pattern matching against
     any value that might be bound to that variable.
     """
-    """
+    _ = """
     A wildcard character and is often used as a placeholder for variables whose values are not needed.
     It can be used to ignore certain variables or to match any value.
     """
-  end
+
 
   def pin_example do
     #Example 1
