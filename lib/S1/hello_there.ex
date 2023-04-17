@@ -1,4 +1,4 @@
-IO.puts("Hello friend, you have programmed in Elixir")
+IO.puts("Hello friend, you are programming in Elixir")
 
 """
 How to run hello_there.ex?

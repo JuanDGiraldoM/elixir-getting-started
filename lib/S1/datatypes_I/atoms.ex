@@ -1,8 +1,13 @@
-a = :hello
+defmodule S1.DatatypesI.Atom do
+  def atoms do
+    a = :hello
 
-IO.puts(:this_is_atomic)
+    IO.puts(:this_is_atomic)
 
-IO.puts("Are you an atom: ? #{is_atom(a)}")
+    IO.puts("Are you an atom: ? #{is_atom(a)}")
 
-#Juego: Blackjack - :winner, :nobody
-#Juego: Ahorcado -:game_over - :winner
+
+  end
+
+
+end
