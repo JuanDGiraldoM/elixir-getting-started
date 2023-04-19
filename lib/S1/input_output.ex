@@ -1,5 +1,5 @@
 defmodule S1.InOut do
-  """
+  _ = """
   Did I have to know something extra about IO.gets/1 or IO.puts
 
   IO.gets/1 function reads a line of input from standard input (usually the terminal) as a string.
@@ -14,9 +14,11 @@ defmodule S1.InOut do
   user on what input is expected to avoid this issue.
 
   """
+  def output do
+    name = IO.gets("What's your name? ") |> String.trim
+    IO.puts("Hello #{name}, nice yo meet you")
+  end
 
-  name = IO.gets("What's your name? ") |> String.trim
-  IO.puts("Hello #{name}, nice yo meet you")
 
 end
 

@@ -1,6 +1,6 @@
 IO.puts("Hello friend, you are programming in Elixir")
 
-"""
+_ = """
 How to run hello_there.ex?
 
 No mix:
