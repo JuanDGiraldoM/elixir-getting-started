@@ -73,7 +73,7 @@ defmodule S2.Games.Hangman do
   end
 end
 
-{status, result} = S2.Games.Hangman.init_juego
-IO.puts("\n")
-IO.inspect(status)
-IO.puts(result)
+#{status, result} = S2.Games.Hangman.init_juego
+#IO.puts("\n")
+#IO.inspect(status)
+#IO.puts(result)
