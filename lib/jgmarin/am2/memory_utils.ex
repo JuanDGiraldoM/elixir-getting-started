@@ -1,4 +1,6 @@
-defmodule S2.MemoryUtils do
+defmodule AM2.MemoryUtils do
+  import AM2.StringUtils
+
   @vowels ~w[a e i o u]
   @consonants ~w[b c d f g h j k l m n p q r s t v w x y z]
 
@@ -29,12 +31,13 @@ defmodule S2.MemoryUtils do
     IO.puts("\n")
   end
 
-  defp print_row(row), do: IO.puts(row |> Enum.map(&get_value/1) |> Enum.join("   "))
+  defp print_row(row),
+    do: row |> Enum.map(&get_value/1) |> Enum.join("   ") |> IO.puts()
 
   defp get_value({%{letter: _letter, hide: hide}, index}) when hide == true,
     do: "[ #{index + 1} ]"
 
-  defp get_value({%{letter: letter, hide: _hide}, _index}), do: "[ #{letter} ]"
+  defp get_value({%{letter: letter, hide: _hide}, _index}), do: "[ #{letter} ]" |> colorize(:green)
 
   def is_board_ready?(board) do
     board

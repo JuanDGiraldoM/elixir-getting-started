@@ -1,6 +1,6 @@
-defmodule S2.MemoryGame do
-  import S2.MemoryUtils
-  import S2.StringUtils
+defmodule AM2.MemoryGame do
+  import AM2.MemoryUtils
+  import AM2.StringUtils
 
   def init() do
     IO.puts("Welcome to Memory Game!")
@@ -19,6 +19,7 @@ defmodule S2.MemoryGame do
       true ->
         print_info("You win!")
         {:win, score}
+
       false ->
         print_status(nickname, score, lives)
         print_board(board)
@@ -42,7 +43,7 @@ defmodule S2.MemoryGame do
             {new_board, obtained_score, lost_lives} = play_pair(board, first - 1, second - 1)
             play(nickname, new_board, score + obtained_score, lives - lost_lives)
         end
-      end
+    end
   end
 
   defp play(_nickname, _board, score, lives) when lives == 0 do
@@ -51,24 +52,41 @@ defmodule S2.MemoryGame do
   end
 
   defp play_pair(board, first, second) do
-    played_board = show_cells(board, first, second)
-    print_board(played_board)
+    {%{letter: first_letter, hide: first_hide}, _} = get_cell(board, first)
+    {%{letter: second_letter, hide: second_hide}, _} = get_cell(board, second)
 
-    first_letter = get_letter(board, first) |> String.downcase()
-    second_letter = get_letter(board, second) |> String.downcase()
-
-    cond do
-      first_letter == second_letter ->
-        if is_vowel?(first_letter) and is_vowel?(second_letter) do
-          print_info("You found a pair of vowels!")
-          {played_board, 15, 0}
-        else
-          print_info("You found a pair of consonants!")
-          {played_board, 10, 0}
-        end
+    case !(first_hide && second_hide) do
       true ->
-        print_error("You didn't find a pair")
-        {board, 0, 1}
+        print_error("You must select two hidden cells")
+        {board, 0, 0}
+
+      _ ->
+        played_board = show_cells(board, first, second)
+        print_board(played_board)
+
+        first_letter_down = first_letter |> String.downcase()
+        second_letter_down = second_letter |> String.downcase()
+
+        case first_letter_down == second_letter_down do
+          true ->
+            {played_board, get_score(first_letter_down), 0}
+
+          _ ->
+            print_error("You didn't find a pair")
+            {board, 0, 1}
+        end
+    end
+  end
+
+  defp get_score(letter) do
+    case is_vowel?(letter) do
+      true ->
+        print_info("You found a pair of vowels!")
+        15
+
+      false ->
+        print_info("You found a pair of consonants!")
+        10
     end
   end
 end
