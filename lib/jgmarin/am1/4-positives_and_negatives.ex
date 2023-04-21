@@ -67,10 +67,12 @@ defmodule PositivesAndNegatives do
         IO.inspect("Zero", label: "Case and guards")
     end
   end
-end
 
-number = IO.gets("Enter a number: ") |> String.trim() |> String.to_integer()
-PositivesAndNegatives.check_number_if_else(number)
-PositivesAndNegatives.check_number_cond(number)
-PositivesAndNegatives.check_number_function(number)
-PositivesAndNegatives.check_number_case(number)
+  def start do
+    number = IO.gets("Enter a number: ") |> String.trim() |> String.to_integer()
+    check_number_if_else(number)
+    check_number_cond(number)
+    check_number_function(number)
+    check_number_case(number)
+  end
+end

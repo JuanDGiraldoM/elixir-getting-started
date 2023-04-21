@@ -59,10 +59,12 @@ defmodule Palindrome do
         IO.inspect("The word #{word} isn't palindrome", label: "Case and guards")
     end
   end
-end
 
-word = IO.gets("Enter a word: ") |> String.trim() |> String.downcase()
-Palindrome.palindrome_if_else(word)
-Palindrome.palindrome_cond(word)
-Palindrome.palindrome_function(word)
-Palindrome.palindrome_case(word)
+  def start do
+    word = IO.gets("Enter a word: ") |> String.trim() |> String.downcase()
+    palindrome_if_else(word)
+    palindrome_cond(word)
+    palindrome_function(word)
+    palindrome_case(word)
+  end
+end

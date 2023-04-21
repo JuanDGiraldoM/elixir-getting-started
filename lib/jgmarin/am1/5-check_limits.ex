@@ -26,8 +26,9 @@ defmodule CheckNumber do
     end
   end
 
+  def start do
+    number = IO.gets("Enter a number: ") |> String.trim() |> String.to_integer()
+    checkNumberLimit(number, 10)
+    checkNumberLimit(number, 10, 5)
+  end
 end
-
-number = IO.gets("Enter a number: ") |> String.trim() |> String.to_integer()
-CheckNumber.checkNumberLimit(number, 10)
-CheckNumber.checkNumberLimit(number, 10, 5)

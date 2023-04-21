@@ -51,10 +51,12 @@ defmodule EvenAndOdd do
         IO.inspect("The number #{number} is odd", label: "Case and guards")
     end
   end
-end
 
-number = IO.gets("Enter a number: ") |> String.trim() |> String.to_integer()
-EvenAndOdd.even_odd_if_else(number)
-EvenAndOdd.even_odd_cond(number)
-EvenAndOdd.even_odd_function(number)
-EvenAndOdd.even_odd_case(number)
+  def start do
+    number = IO.gets("Enter a number: ") |> String.trim() |> String.to_integer()
+    even_odd_if_else(number)
+    even_odd_cond(number)
+    even_odd_function(number)
+    even_odd_case(number)
+  end
+end

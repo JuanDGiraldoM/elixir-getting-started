@@ -52,10 +52,24 @@ defmodule Greetings do
         IO.inspect("Nice to meet you!", label: "Case and guards")
     end
   end
-end
 
-map = %{name: "Maria", age: 30, city: "Itagüí"}
-Greetings.greetings_if_else(map)
-Greetings.greetings_cond(map)
-Greetings.greetings_function(map)
-Greetings.greetings_guard_case(map)
+  @doc """
+  Crea un mapa con las claves "nombre", "edad" y "ciudad".
+  Utiliza la función Map.get/3 para obtener el valor de "nombre" e imprime "¡Hola {nombre}!".
+  """
+  def greetings(map) do
+    name = Map.get(map, :name)
+    IO.puts("Hello #{name}!")
+  end
+
+  def start do
+    map = %{name: "Maria", age: 30, city: "Itagüí"}
+    greetings_if_else(map)
+    greetings_cond(map)
+    greetings_function(map)
+    greetings_guard_case(map)
+
+    map = %{name: "Juan", age: 30, city: "Itagüí"}
+    greetings(map)
+  end
+end
