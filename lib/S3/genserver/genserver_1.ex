@@ -6,7 +6,6 @@ defmodule S3.Genserver.Genserver1 do
   #GenServer facilitates all the the 'rudimentary' steps to launch and communicate processes.
   #Elixir puts a condition for this: Declare some functions with an specific name in order to help you.
   use GenServer #Import a behavior that identify and declare the existence of some specific functions
-
   #First specific function to declare yes or yes: init/1 - it will be called when we start the Genserver/Module
   def init(_param) do
     IO.puts("S3.Genserver.Genserver1 started!")
@@ -17,12 +16,12 @@ defmodule S3.Genserver.Genserver1 do
 
   #To manage messages - Another function to declare: handle_info/2 - It works each time we send a message to the Genserver - The replace for receive do structure
   #As a specific function that Genserver looks when you send something to the running process, pattern matching can be apply.
-  #This wont be trigger because %{count_2: count} was not launched in the init
-  def handle_info(:greet, %{count_2: count}) do
+  #This wont be trigger if you set %{count_2: count} bc it was not launched in the init
+  def handle_info(:greet, %{count: count}) do
     IO.puts "Triggered if you call with :greet #1"
     IO.puts("Number of calls: #{count}")
     #The last line always must be a tuple {:noreply, state}
-    {:noreply, %{count_2: count + 2}}
+    {:noreply, %{count: count + 1}}
   end
 
   #The default one: Genserver while doing the matching it pays attention to both parameters, state variable acts as a 'all_type_param'

@@ -3,8 +3,8 @@ defmodule S2.Games.Memory.MemoryUtils do
     vowels = ["a", "e", "i", "o", "u"]
     alphabet = for letter <- String.graphemes("abcdefghijklmnopqrstuvwxyz") do
       case letter in vowels do
-        true -> {String.to_atom(letter), {String.upcase(letter), letter, :vowel}}
-        false -> {String.to_atom(letter), {String.upcase(letter), letter, :consonant}}
+        true -> {String.to_atom(letter), {String.upcase(letter), letter, :vowel, :notfound}}
+        false -> {String.to_atom(letter), {String.upcase(letter), letter, :consonant, :notfound}}
       end
 
     end
@@ -33,18 +33,31 @@ defmodule S2.Games.Memory.MemoryUtils do
 
   def board() do
     """
-    [ 1 ]  [ 2 ]  [ 3 ]  [ 4 ]
-    [ 5 ]  [ 6 ]  [ 7 ]  [ 8 ]
-    [ 9 ] [ 10 ] [ 11 ] [ 12 ]
+    [ -1- ]  [ -2- ]  [ -3- ]  [ -4- ]
+    [ -5- ]  [ -6- ]  [ -7- ]  [ -8- ]
+    [ -9- ] [ -10- ] [ -11- ] [ -12- ]
     """
   end
 
-  def load_board(sel_letters) do #[{"A", "a"}, {"B", "b"},....] end
-    l_letters = Enum.flat_map(sel_letters, &Tuple.to_list/1) #["A", "a", "B", "b",....]
-    l_pos = 1..12 |> Enum.to_list() |> Enum.shuffle() #[5, 3, 9, 1, ....]
-    Enum.zip(l_letters, l_pos) #[{"A", 5}, {"a", 3}, ....]
+  def load_board(sel_letters, alphabet) do
+    l_letters = Enum.flat_map(sel_letters, &Tuple.to_list/1)
+    range_nums = 1..12  |> Enum.to_list() |> Enum.shuffle
+
+    l_pos_pair = range_nums
+            |> Enum.map( fn e -> to_string(e) end) #["5","7", "1", "2", ...]
+            |> Enum.chunk_every(2) #[["5","7"], ...]
+            |> Enum.map(fn l -> {String.to_integer(Enum.at(l,0)), String.to_integer(Enum.at(l,1))} end) #[{5,7}, {1,2}, ...]
+            |> Enum.zip(sel_letters)
+                 |> Map.new() #%{{5,7} => {"A", "a", ..},...}
+                 |>  Enum.map( fn {k,v} ->
+                      type_letter = Map.get(alphabet, String.to_atom(elem(v,0) |> String.downcase))
+                      IO.inspect(type_letter, label: "Type letter")
+                      {k , type_letter} end)
+    l_pos_single = range_nums
+                   |> Enum.to_list()
+
+    {l_pos_pair |> Map.new , Enum.zip(l_letters, l_pos_single) |> Map.new}
   end
-
-
-
 end
+
+#c("lib/S2/games/memory/memory_utils.ex")

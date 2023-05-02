@@ -18,6 +18,11 @@ defmodule S3.Genserver.Genserver2 do
   #end
   #---------
   use GenServer
+
+  def start_link([]) do #Renamed before was start_calculator
+    GenServer.start_link(__MODULE__, [], name: GCalculator)
+  end
+
   def init(_param) do
     IO.puts("S3.Genserver.Genserver2 started!")
     {:ok, %{called: {:op, 0, 0}} }
@@ -25,38 +30,33 @@ defmodule S3.Genserver.Genserver2 do
 
   def handle_call({op, n1, n2}, _from, %{called: _called}) do
     %{called: called} = %{called: {op, n1, n2}}
-    IO.puts("Processing...")
-    Process.sleep(1000)
     result = case {op, n1, n2} do
       {:+, n1, n2} -> n1 + n2
       {:-, n1, n2} -> n1 - n2
       {:x, n1, n2} -> n1 * n2
+      {:/, _, 0} -> :infinity
       {:/, n1, n2} -> n1 / n2
     end
     IO.inspect(called, label: "Processed")
     {:reply, result, %{called: {op, n1, n2}}}
   end
 
-  def handle_cast(:reset, %{called: _called} ) do
-    %{called: called} = %{called: {:op, 0, 0}}
-    IO.puts("Re-starting...")
-    Process.sleep(1000)
-    IO.inspect(called, label: "Re-started")
-    {:noreply, %{called: called}}
-  end
+  #def handle_cast(:reset, %{called: _called} ) do
+  #  %{called: called} = %{called: {:op, 0, 0}}
+  #  IO.puts("Re-starting...")
+  #  Process.sleep(1000)
+  #  IO.inspect(called, label: "Re-started")
+  #  {:noreply, %{called: called}}
+  #end
 
   #Now let's talk about wrapping GenServer in custom functions - Let's remake the calculator:
-  def start_calculator do
-    GenServer.start_link(S3.Genserver.Genserver2, [])
+  def calculator(op, n1, n2) do
+    GenServer.call(GCalculator, {op, n1, n2})
   end
 
-  def calculator(pid, op, n1, n2) do
-    GenServer.call(pid, {op, n1, n2})
-  end
-
-  def restart(pid) do
-    GenServer.cast(pid, :reset)
-  end
+  #def restart(pid) do
+  #  GenServer.cast(pid, :reset)
+  #end
 
 
 
