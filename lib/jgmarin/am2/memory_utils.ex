@@ -25,9 +25,10 @@ defmodule AM2.MemoryUtils do
 
   def print_board(board) do
     IO.puts("\n")
-    print_row(Enum.slice(board, 0..3))
-    print_row(Enum.slice(board, 4..7))
-    print_row(Enum.slice(board, 8..11))
+
+    Enum.chunk_every(board, 4, 4, :discard)
+    |> Enum.map(&print_row/1)
+
     IO.puts("\n")
   end
 
@@ -37,7 +38,11 @@ defmodule AM2.MemoryUtils do
   defp get_value({%{letter: _letter, hide: hide}, index}) when hide == true,
     do: "[ #{index + 1} ]"
 
-  defp get_value({%{letter: letter, hide: _hide}, _index}), do: "[ #{letter} ]" |> colorize(:green)
+  defp get_value({%{letter: letter, hide: hide}, _index}) when hide == "temp",
+    do: "[ #{letter} ]" |> colorize(:yellow)
+
+  defp get_value({%{letter: letter, hide: _hide}, _index}),
+    do: "[ #{letter} ]" |> colorize(:green)
 
   def is_board_ready?(board) do
     board
@@ -46,13 +51,21 @@ defmodule AM2.MemoryUtils do
   end
 
   def show_cells(board, first, second) do
+    show_cells(board, first, second, "temp")
+  end
+
+  def unlock_cells(board, first, second) do
+    show_cells(board, first, second, false)
+  end
+
+  defp show_cells(board, first, second, value) do
     board
     |> Enum.map(fn {cell, i} = item ->
-      if i == first || i == second, do: {show_cell(cell), i}, else: item
+      if i == first || i == second, do: {show_cell(cell, value), i}, else: item
     end)
   end
 
-  defp show_cell(map) when is_map(map), do: %{map | hide: false}
+  defp show_cell(map, value) when is_map(map), do: %{map | hide: value}
 
   def get_cell(board, index), do: board |> Enum.at(index)
 
