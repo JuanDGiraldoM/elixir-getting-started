@@ -111,8 +111,8 @@ defmodule AM3.MemoryServer do
     nick_name1 = IO.gets("Enter player_1 nickname: ") |> String.trim()
     nick_name2 = IO.gets("Enter player_2 nickname: ") |> String.trim()
 
-    player_1 = %{nick_name: nick_name1, lives: 1, score: 0}
-    player_2 = %{nick_name: nick_name2, lives: 1, score: 0}
+    player_1 = %{nick_name: nick_name1, lives: 4, score: 0}
+    player_2 = %{nick_name: nick_name2, lives: 4, score: 0}
     board = load_board()
 
     state = %{board: board, player_1: player_1, player_2: player_2, turn: :player_1, round: 1}
